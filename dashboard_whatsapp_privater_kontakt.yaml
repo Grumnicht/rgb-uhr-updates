@@ -1,0 +1,30 @@
+# In RGB-Wanduhr: Bearbeiten -> Karte hinzufügen -> Manuell.
+# Der erste Button oeffnet ein separates Home-Assistant-Popup mit verdeckter ID-Eingabe.
+type: vertical-stack
+cards:
+  - type: markdown
+    content: >-
+      ### WhatsApp-Blinken
+      Kontakt-ID nur lokal eingeben. Im oeffentlichen Update-Paket steht keine ID.
+  - type: button
+    name: WhatsApp Kontakt-ID eingeben / ändern
+    icon: mdi:form-textbox-password
+    entity: input_text.rgb_uhr_whatsapp_kontakt_id
+    show_state: false
+    tap_action:
+      action: more-info
+  - type: entities
+    title: WhatsApp-Anzeige
+    show_header_toggle: false
+    entities:
+      - entity: input_boolean.rgb_uhr_whatsapp_ein
+        name: Blinken bei Nachricht aktiviert
+      - entity: light.rgb_uhr_whatsapp_blinkfarbe
+        name: Blinkfarbe und Helligkeit
+  - type: button
+    name: Blinkfunktion 10 Sekunden testen
+    icon: mdi:whatsapp
+    show_state: false
+    tap_action:
+      action: perform-action
+      perform_action: script.rgb_uhr_whatsapp_blinken_test
